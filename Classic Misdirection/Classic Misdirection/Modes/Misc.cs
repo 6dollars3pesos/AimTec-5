@@ -29,11 +29,11 @@ namespace Classic_Misdirection
 
         public bool IsPassive(Obj_AI_Base hero)
         {
-            return hero.HasBuff("LeblancPMark") && Game.ClockTime - hero.GetBuff("LeblancPMark").StartTime > 0.75;
+            return hero.HasBuff("LeblancPMark") && Game.ClockTime - hero.GetBuff("LeblancPMark").StartTime > 1;
         }
         public bool IsPassiveM(Obj_AI_Base hero)
         {
-            return hero.HasBuff("leblancpminion") && Game.ClockTime - hero.GetBuff("leblancpminion").StartTime > 0.75;
+            return hero.HasBuff("leblancpminion") && Game.ClockTime - hero.GetBuff("leblancpminion").StartTime > 1;
         }
 
         public string GetComboName()

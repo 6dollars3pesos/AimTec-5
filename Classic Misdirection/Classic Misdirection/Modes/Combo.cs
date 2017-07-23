@@ -27,10 +27,10 @@ namespace Classic_Misdirection
             bool useW = RootM["combo"]["useW"].As<MenuBool>().Enabled;
             bool useE = RootM["combo"]["useE"].As<MenuBool>().Enabled;
             bool useR = RootM["combo"]["useR"].As<MenuBool>().Enabled;
-            bool Qmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
-            bool Wmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
-            bool Emana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
-            bool Rmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Rmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
             if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value != 0)
             {
                 return;
@@ -106,10 +106,10 @@ namespace Classic_Misdirection
             bool useW = RootM["combo"]["useW"].As<MenuBool>().Enabled;
             bool useE = RootM["combo"]["useE"].As<MenuBool>().Enabled;
             bool useR = RootM["combo"]["useR"].As<MenuBool>().Enabled;
-            bool Qmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
-            bool Wmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
-            bool Emana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
-            bool Rmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Rmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
             if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value != 1)
             {
                 return;

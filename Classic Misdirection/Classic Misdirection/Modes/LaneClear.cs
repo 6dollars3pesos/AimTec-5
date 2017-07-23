@@ -24,7 +24,6 @@ namespace Classic_Misdirection
                 {
                     qcount += 1;
                 }
-                Console.WriteLine(qcount);
                 if (minion != null)
                 {
                     if (RootM["farm"]["laneclear"]["useW"].As<MenuBool>().Enabled && W.Ready && Wmana)

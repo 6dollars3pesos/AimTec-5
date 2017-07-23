@@ -36,7 +36,7 @@ namespace The_Living_Shadow
             if (MyHero.Distance(target) < globalrange)
             {
                 if (MyHero.Distance(target) < R.Range &&
-                    RootM["combo"]["useR"].As<MenuBool>().Enabled && RootM["combo"]["blacklist"]["use" + target.ChampionName.ToLower()].As<MenuBool>().Enabled)
+                    !RootM["combo"]["useR"].As<MenuBool>().Enabled && RootM["combo"]["blacklist"]["use" + target.ChampionName.ToLower()].As<MenuBool>().Enabled)
                 {
                     this.CastR(target);
                 }

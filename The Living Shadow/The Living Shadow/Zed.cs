@@ -13,9 +13,6 @@ namespace The_Living_Shadow
     internal partial class Zed
     {
 
-        
-
-
         public Zed()
         {
             this.LoadSpells();
@@ -125,7 +122,7 @@ namespace The_Living_Shadow
                         {
                             Wtimer = 0;
                             Wdmgp = false;
-                            Wpos = new Vector3(0,0,0);
+                            Wpos = new Vector3();
                             StartTime = 0;
                         }
 

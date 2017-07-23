@@ -25,8 +25,6 @@ namespace The_Living_Shadow
                 {
                     double Qdamage = MyHero.GetSpellDamage(target, SpellSlot.Q);
                     double Edamage = MyHero.GetSpellDamage(target, SpellSlot.E);
-                    if ((IsDie(target, Qdamage) && !Q.Ready) || (IsDie(target, Edamage) && !E.Ready))
-                    {
                         if (MyHero.SpellBook.GetSpell(SpellSlot.W).Name.ToLower() == "zedw2")
                         {
                             this.CastW2();
@@ -35,22 +33,11 @@ namespace The_Living_Shadow
                         {
                             R.Cast();
                         }
-                    }
                 }
             }
         }
 
-        public bool IsDie(Obj_AI_Base tar, double damage = 0)
-        {
-            if (tar.HasBuff("zedrtargetmark"))
-            {
-                if ((TotalRDamage + damage) * (20f + MyHero.SpellBook.GetSpell(SpellSlot.R).Level * 10) / 100f >= target.Health)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+       
         public bool IsW1()
         {
             return MyHero.SpellBook.GetSpell(SpellSlot.W).Name == "ZedW";

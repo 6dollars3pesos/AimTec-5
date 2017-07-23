@@ -18,7 +18,6 @@ namespace The_Living_Shadow
             {
                 double Qdamage = MyHero.GetSpellDamage(minion, SpellSlot.Q);
                 double Edamage = MyHero.GetSpellDamage(minion, SpellSlot.E);
-                Console.WriteLine(Qdamage);
                 if (RootM["farm"]["lasthit"]["useQ"].As<MenuBool>().Enabled && Qdamage > minion.Health && Q.Ready && Qmana)
                 {
                     Q.Cast(minion);

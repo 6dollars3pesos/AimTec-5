@@ -74,7 +74,6 @@ namespace The_Living_Shadow
             {
                 if (target.Distance(Rpos) < E.Range)
                 {
-                    Console.WriteLine("1");
                     E.Cast();
                 }
             }
@@ -82,13 +81,11 @@ namespace The_Living_Shadow
             {
                 if (target.Distance(Wpos) < E.Range)
                 {
-                    Console.WriteLine("2");
                     E.Cast();
                 }
             }
             if (MyHero.Distance(target) < E.Range)
             {
-                Console.WriteLine("3");
                 E.Cast();
 
             }

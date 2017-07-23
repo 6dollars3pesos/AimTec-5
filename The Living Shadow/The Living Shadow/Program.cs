@@ -15,7 +15,7 @@ namespace The_Living_Shadow
         {
             if (ObjectManager.GetLocalPlayer().ChampionName == "Zed")
             {
-                Console.WriteLine("yüklendi");
+                Console.WriteLine("The Living Shadow by Krystra has been loaded.");
                 var Zed = new Zed();
             }
 

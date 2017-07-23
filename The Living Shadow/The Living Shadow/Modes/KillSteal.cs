@@ -1,4 +1,5 @@
-﻿using Aimtec;
+﻿using System;
+using Aimtec;
 using Aimtec.SDK.Damage;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Components;
@@ -20,18 +21,18 @@ namespace The_Living_Shadow
             }
             foreach (var hptarget in GameObjects.EnemyHeroes.Where(a => a.IsValidTarget(1200) && !a.IsDead))
             {
-                if (!hptarget.IsValid || hptarget.IsDead)
+                if (!hptarget.IsValid || hptarget.IsDead || hptarget ==null)
                 {
                     return;
                 }
                 var Health = hptarget.Health;
-                var dmgE = MyHero.GetSpellDamage(target, SpellSlot.E);
+                var dmgE = MyHero.GetSpellDamage(hptarget, SpellSlot.E);
                 if (MyHero.Distance(hptarget) < E.Range && Health < dmgE && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
                     RootM["killsteal"]["useE"].As<MenuBool>().Enabled)
                 {
                     this.CastE();
                 }
-                var dmgQ = MyHero.GetSpellDamage(target, SpellSlot.Q);
+                var dmgQ = MyHero.GetSpellDamage(hptarget, SpellSlot.Q);
                 if (MyHero.Distance(hptarget) < Q.Range && Health < dmgQ && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
                     RootM["killsteal"]["useQ"].As<MenuBool>().Enabled)
                 {
@@ -44,7 +45,7 @@ namespace The_Living_Shadow
                 {
                     Ignite.CastOnUnit(hptarget);
                 }
-
+               // this.DoOneShotCombo(hptarget);
             }
 
 
@@ -55,7 +56,7 @@ namespace The_Living_Shadow
         private double totaldamage;
         public void DoOneShotCombo(Obj_AI_Hero unit)
         {
-            if (unit == null)
+            if (unit == null || !unit.IsValid)
             {
                 return;
             }
@@ -63,10 +64,10 @@ namespace The_Living_Shadow
             {
                 ShadowPosOneShotCombo = unit.ServerPosition.Extend(Rpos, 600);
             }
-            double dmgQ = MyHero.GetSpellDamage(target, SpellSlot.Q);
-            double dmgW = MyHero.GetSpellDamage(target, SpellSlot.W);
-            double dmgE = MyHero.GetSpellDamage(target, SpellSlot.E);
-            double dmgR = MyHero.GetSpellDamage(target, SpellSlot.R);
+            double dmgQ = MyHero.GetSpellDamage(unit, SpellSlot.Q);
+            double dmgW = MyHero.GetSpellDamage(unit, SpellSlot.W);
+            double dmgE = MyHero.GetSpellDamage(unit, SpellSlot.E);
+            double dmgR = MyHero.GetSpellDamage(unit, SpellSlot.R);
             totaldamage = dmgQ + dmgW + dmgE + dmgR;
             if (IsIgnite)
             {
@@ -90,7 +91,7 @@ namespace The_Living_Shadow
                         }
                         if (MyHero.Distance(unit) < W.Range)
                         {
-                            if (!Rpos.Equals(new Vector3()) && !Wpos.Equals(new Vector3()))
+                            if (!Rpos.Equals(new Vector3()) && Wpos.Equals(new Vector3()))
                             {
                                 DelayAction.Queue(210, () => this.CastW(ShadowPosOneShotCombo));
                             }
@@ -99,7 +100,7 @@ namespace The_Living_Shadow
                         {
                             if (MyHero.Distance(unit) < Q.Range)
                             {
-                                this.CastQ(target);
+                                this.CastQ(unit);
                             }
                         }
                         if (!Q.Ready && !W.Ready)

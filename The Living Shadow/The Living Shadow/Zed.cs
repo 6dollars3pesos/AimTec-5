@@ -49,6 +49,7 @@ namespace The_Living_Shadow
             {
                 this.DoLaneClear();
             }
+            this.DoKillSteal();
             this.LoadAutos();
             this.ReturnSettings();
         }
@@ -61,6 +62,19 @@ namespace The_Living_Shadow
             }
             this.DrawSpells();
 
+        }
+
+        private void OnDamage(AttackableUnit sender, AttackableUnitDamageEventArgs e)
+        {
+            if (!e.Source.IsMe)
+            {
+                return;
+            }
+            var tar = e.Target as Obj_AI_Hero;
+            if (tar != null && tar.HasBuff("zedrtargetmark"))
+            {
+                TotalRDamage += e.Damage;
+            }
         }
         private void ProcessSpell(Obj_AI_Base sender, Obj_AI_BaseMissileClientDataEventArgs e)
         {
@@ -88,6 +102,7 @@ namespace The_Living_Shadow
                 Rtimer = 7.5f;
                 Rdmgp = true;
                 Rdmgcheck = true;
+                TotalRDamage = 0;
                 DelayAction.Queue(3750, () => Rdmgcheck = false);
                 StartTimeR = Game.ClockTime + 7.5f;
 

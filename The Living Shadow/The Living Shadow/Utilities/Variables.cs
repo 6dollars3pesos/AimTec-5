@@ -22,7 +22,7 @@ namespace The_Living_Shadow
         public static Obj_AI_Hero MyHero => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target = TargetSelector.GetTarget(925);
         public bool wgapclose = false;
-
+        public float TotalRDamage;
 
     }
 

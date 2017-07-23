@@ -43,7 +43,7 @@ namespace The_Living_Shadow
                         Combo.Add(new MenuSeperator("blank1"));
                         Combo.Add(new MenuSeperator("extra", "Extra Settings"));
                         Combo.Add(new MenuBool("forcer", "Force to start with Ulti"));
-                        Combo.Add(new MenuBool("secondw", "Use second W to Chase", true));
+                        Combo.Add(new MenuBool("secondw", "Use second W to Chase", false));
                         // Combo.Add(new MenuBool("useitem", "Use Items After R", true));
                         Combo.Add(new MenuBool("wgap", "Use W to Gap Close", false));
                         Combo.Add(new MenuSliderBool("Mana", "Energy Manager %", true, 15, 10, 99));
@@ -51,7 +51,7 @@ namespace The_Living_Shadow
                         ComboBlacklist = new Menu("blacklist", "Blacklist For Ulti");
                         foreach (var tar in GameObjects.EnemyHeroes)
                         {
-                            ComboBlacklist.Add(new MenuBool("use" + tar.ChampionName.ToLower(), "Don't use on :" + tar.ChampionName, true));
+                            ComboBlacklist.Add(new MenuBool("use" + tar.ChampionName.ToLower(), "Don't use on :" + tar.ChampionName, false));
                         }
                         Combo.Add(ComboBlacklist);
 
@@ -118,7 +118,7 @@ namespace The_Living_Shadow
 
                         LastHit = new Menu("lasthit", "LastHit Settings");
                         {
-                            LastHit.Add(new MenuBool("autolasthit", "Use Auto LastHit", true));
+                            LastHit.Add(new MenuBool("autolasthit", "Use Auto LastHit", false));
                             LastHit.Add(new MenuBool("useQ", "Use Q in LastHit", true));
                             LastHit.Add(new MenuBool("useE", "Use E in LastHit", true));
                             LastHit.Add(new MenuSeperator("blank1"));
@@ -144,16 +144,16 @@ namespace The_Living_Shadow
                 {
                     KillSteal = new Menu("killsteal", "KillSteal Settings");
                     {
-                        OneShot = new Menu("oneshot", "OneShotCombo Settings");
-                        OneShot.Add(new MenuBool("oto", "Use One Shot Combo", true));
-
-                        foreach (var tar in GameObjects.EnemyHeroes)
-                        {
-                            OneShot.Add(new MenuBool(tar.ChampionName.ToLower(), "Use on :" + tar.ChampionName, true));
-                        }
-                    }
-                    KillSteal.Add(OneShot);
-
+                        /*  OneShot = new Menu("oneshot", "OneShotCombo Settings");
+                          OneShot.Add(new MenuBool("oto", "Use One Shot Combo", true));
+  
+                          foreach (var tar in GameObjects.EnemyHeroes)
+                          {
+                              OneShot.Add(new MenuBool(tar.ChampionName.ToLower(), "Use on :" + tar.ChampionName, false));
+                          }
+                      }
+                      KillSteal.Add(OneShot);*/
+                    } // silinecek
                     KillSteal.Add(new MenuBool("ks", "Use KillSteal", true));
                     KillSteal.Add(new MenuBool("useQ", "Use Q in Killsteal", true));
                     KillSteal.Add(new MenuBool("useE", "Use E in Killsteal", true));

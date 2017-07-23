@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Components;
@@ -23,7 +24,7 @@ namespace The_Living_Shadow
                 switch (RootM["combo"]["rlogic"].As<MenuList>().Value)
                 {
                     case 0:
-                        Wcastpos = (target.ServerPosition + (target.ServerPosition - Rpos).Normalized() * 600);
+                        Wcastpos = (target.ServerPosition + (target.ServerPosition - Rpos).Normalized() * 450);
                         break;
                     case 1:
                         Wcastpos = (target.ServerPosition + (target.ServerPosition - Rpos).Normalized() * 350).To2D().Perpendicular().To3D();
@@ -70,13 +71,13 @@ namespace The_Living_Shadow
 
                 if (MyHero.Distance(target) < Q.Range && RootM["combo"]["useQ"].As<MenuBool>().Enabled)
                 {
-                    if (!Wpos.Equals(new Vector3()) && MyHero.SpellBook.GetSpell(SpellSlot.W).Name != "ZedW2")
+                    if (!Wpos.Equals(new Vector3()) && MyHero.SpellBook.GetSpell(SpellSlot.W).Name == "ZedW2")
                     {
                         this.CastQ(target);
                     }
-                    else if (!W.Ready || MyHero.SpellBook.GetSpell(SpellSlot.W).Name != "ZedW2")
+                    else if (!W.Ready || MyHero.SpellBook.GetSpell(SpellSlot.W).Name != "ZedW2" || Wpos.Equals(new Vector3()))
                     {
-                        Q.Cast(target);
+                        this.CastQ(target);
                     }
                 }
 

@@ -17,9 +17,16 @@ namespace Classic_Misdirection
             {
                 return;
             }
+            if (RootM["combo"]["combologics"]["rlogic"].As<MenuList>().Value == 0)
+            {
+                NewComboLogic();
+            }
+            else
+            {
+                DynamicCombo();
+                ManuelCombo();
+            }
 
-            DynamicCombo();
-            ManuelCombo();
         }
         private void DynamicCombo()
         {
@@ -35,64 +42,61 @@ namespace Classic_Misdirection
             {
                 return;
             }
-                if (ComboName =="W" )  //wQRE
+                if (MyHero.Distance(target) < W.Range)  //wQRE
                 {
-                    combostart = true;
                     if (Wmana && useW && IsW1())
                     {
                     CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if ((IsW2() || !W.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (Rmana && useR && !Q.Ready && IsR1())
+                    if (Rmana && useR && IsR1())
                     {
                         CastR("RQ", target);
                     }
-                    if (useE && Emana && (!R.Ready && IsR2()))
+                    if (useE && Emana )
                     {
                         CastE(target);
                     }
                 }
-                else if (ComboName == "RE")//REQEW
+                else if (MyHero.Distance(target) < E.Range)//REQEW
             {
-                combostart = true;
                 if (Rmana && useR && IsR1())
                     {
                     CastR("RE", target);
                     }
-                    if ((IsR2() || !R.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && Emana && useE)
+                    if ( Emana && useE)
                     {
                         CastE(target);
                     }
-                    if (!E.Ready && useW && Wmana && IsW1())
+                    if ( useW && Wmana && IsW1())
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                 }
 
                 }
-                else if (ComboName == "Gap")//gapclose combo W-R(E)-E-Q
+                else if (target.IsValidTarget(W.Range + Q.Range))//gapclose combo W-R(E)-E-Q
             {
-                combostart = true;
                 var pos = MyHero.ServerPosition.Extend(target.ServerPosition, W.Range);
                     if (IsW1() && useW && Wmana)
                     {
                     CastW(pos);
                     }
-                    if ((IsW2() || !W.Ready) && useR && Rmana && IsR1())
+                    if ( useR && Rmana && IsR1())
                     {
                         CastR("RE", target);
                     }
-                    if ((IsR2() || !R.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && Emana && useE)
+                    if ( Emana && useE)
                     {
                         CastE(target);
                 }
@@ -100,6 +104,129 @@ namespace Classic_Misdirection
 
         }
 
+        private void NewComboLogic()
+        {
+            bool useQ = RootM["combo"]["useQ"].As<MenuBool>().Enabled;
+            bool useW = RootM["combo"]["useW"].As<MenuBool>().Enabled;
+            bool useE = RootM["combo"]["useE"].As<MenuBool>().Enabled;
+            bool useR = RootM["combo"]["useR"].As<MenuBool>().Enabled;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Rmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
+  
+            if (RootM["combo"]["combologics"]["rslogic"].As<MenuList>().Value == 0)
+            {
+                if (MyHero.Distance(target) < Q.Range)
+                {
+                    if (useQ && Qmana)
+                    {
+                        CastQ(target);
+                    }
+                    if (useE && Emana && !Q.Ready)
+                    {
+                        CastE(target);
+                    }
+                    if (useR && Rmana)
+                    {
+                        CastR("RQ", target);
+                    }
+                    if (useW && Wmana && IsW1() && !R.Ready)
+                    {
+                        CastW(target.ServerPosition);
+                    }
+                }
+                else if (MyHero.Distance(target) < E.Range)
+                {
+                    if (useE && Emana)
+                    {
+                        CastE(target);
+                    }
+
+                    if (useQ && Qmana && !E.Ready)
+                    {
+                        CastQ(target);
+                    }
+                    if (useR && Rmana && !Q.Ready)
+                    {
+                        CastR("RQ", target);
+                    }
+                    if (useW && Wmana && IsW1() && !R.Ready)
+                    {
+                        CastW(target.ServerPosition);
+                    }
+
+                }
+            }
+            else if (RootM["combo"]["combologics"]["rslogic"].As<MenuList>().Value == 1)
+            {
+                if (MyHero.Distance(target) < Q.Range)
+                {
+                    if (useQ && Qmana)
+                    {
+                        CastQ(target);
+                    }
+                    if (useE && Emana && !Q.Ready)
+                    {
+                        CastE(target);
+                    }
+                    if (useR && Rmana)
+                    {
+                        CastR("RE", target);
+                    }
+                    if (useW && Wmana && IsW1() && !R.Ready)
+                    {
+                        CastW(target.ServerPosition);
+                    }
+                }
+                else if (MyHero.Distance(target) < E.Range)
+                {
+                    if (useE && Emana)
+                    {
+                        CastE(target);
+                    }
+
+                    if (useQ && Qmana && IsPassive(target))
+                    {
+                        CastQ(target);
+                    }
+                    if (useR && Rmana)
+                    {
+                        CastR("RE", target);
+                    }
+                    if (useW && Wmana && IsW1() && !R.Ready)
+                    {
+                        CastW(target.ServerPosition);
+                    }
+
+                }
+            }
+            else
+            {
+                if (MyHero.Distance(target) < W.Range)
+                {
+                    if (useQ && Qmana)
+                    {
+                        CastQ(target);
+                    }
+                    if (useE && Emana && !Q.Ready)
+                    {
+                        CastE(target);
+                    }
+                    if (useR && Rmana)
+                    {
+                        CastR("RW", target);
+                    }
+                    if (useW && Wmana && IsW1() && !R.Ready)
+                    {
+                        CastW(target.ServerPosition);
+                    }
+                }
+                
+            }
+            
+
+        }
         private void ManuelCombo()
         {
             bool useQ = RootM["combo"]["useQ"].As<MenuBool>().Enabled;
@@ -121,15 +248,15 @@ namespace Classic_Misdirection
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && Wmana && useW)
+                    if ( Wmana && useW)
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if (IsW2() && useE && Emana)
+                    if ( useE && Emana)
                     {
                         CastE(target);
                     }
-                    if (!E.Ready && useR && Rmana && IsR1())
+                    if ( useR && Rmana && IsR1())
                     {
                         CastR("RW",target);
                     }
@@ -139,15 +266,15 @@ namespace Classic_Misdirection
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && useR && Rmana && IsPassive(target))
+                    if ( useR && Rmana && IsPassive(target))
                     {
                         CastR("RQ",target);
                     }
-                    if (useE && Emana && (IsR2() || !R.Ready))
+                    if (useE && Emana )
                     {
                         CastE(target);
                     }
-                    if (useW && Wmana && !E.Ready)
+                    if (useW && Wmana)
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
@@ -157,15 +284,15 @@ namespace Classic_Misdirection
                     {
                         CastE(target);
                     }
-                    if (Qmana && useQ && !E.Ready && IsPassive(target))
+                    if (Qmana && useQ &&  IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (Wmana && useW && !Q.Ready && IsW1())
+                    if (Wmana && useW  && IsW1())
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if (IsR1() && useR && Rmana && IsW2())
+                    if (IsR1() && useR && Rmana)
                     {
                         CastR("RW",target);
                     }
@@ -175,15 +302,15 @@ namespace Classic_Misdirection
                     {
                         CastE(target);
                     }
-                    if (Wmana && useW && !E.Ready && IsW1())
+                    if (Wmana && useW  && IsW1())
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if ((IsW2() || !W.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && useR && Rmana)
+                    if ( useR && Rmana)
                     {
                         CastR("RQ",target);
                     }
@@ -193,15 +320,15 @@ namespace Classic_Misdirection
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if ((!W.Ready || IsW2()) && Rmana && useR)
+                    if (  Rmana && useR)
                     {
                         CastR("RW",target);
                     }
-                    if ((IsR2() || !R.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (useE && Emana &&!Q.Ready)
+                    if (useE && Emana )
                     {
                         CastE(target);
                     }
@@ -211,15 +338,15 @@ namespace Classic_Misdirection
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if ((IsW2() || !W.Ready) && useQ && Qmana && IsPassive(target))
+                    if ( useQ && Qmana && IsPassive(target))
                     {
                         CastQ(target);
                     }
-                    if (Rmana && useR && !Q.Ready && IsR1())
+                    if (Rmana && useR &&  IsR1())
                     {
                         CastR("RQ",target);
                     }
-                    if (useE && Emana &&( !R.Ready && IsR2()))
+                    if (useE && Emana )
                     {
                         CastE(target);
                     }
@@ -229,15 +356,15 @@ namespace Classic_Misdirection
                     {
                         CastQ(target);
                     }
-                    if (!Q.Ready && useR && Rmana && IsR1())
+                    if ( useR && Rmana && IsR1())
                     {
                         CastR("RQ",target);
                     }
-                    if ((IsR2() || !R.Ready) && useW && Rmana && IsW1())
+                    if ( useW && Rmana && IsW1())
                     {
                         CastW(W.GetPrediction(target).CastPosition);
                     }
-                    if ((IsW2() || !W.Ready) && useE && Emana)
+                    if ( useE && Emana)
                     {
                         DelayAction.Queue(450, () => CastE(target));
                     }
@@ -249,15 +376,15 @@ namespace Classic_Misdirection
                         {
                             CastQ(target);
                         }
-                        if (!Q.Ready && Wmana && useW && IsW1())
+                        if ( Wmana && useW && IsW1())
                         {
                             CastW(W.GetPrediction(target).CastPosition);
                         }
-                        if ((IsW2() || !W.Ready) && Emana && useE)
+                        if ( Emana && useE)
                         {
                             CastE(target);
                         }
-                        if (!E.Ready && useR && Rmana && IsR1())
+                        if ( useR && Rmana && IsR1())
                         {
                             R.Cast();
                             delaycheck = true;

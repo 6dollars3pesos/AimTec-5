@@ -33,7 +33,7 @@ namespace Classic_Misdirection
                          Combo.Add(ComboBack);*/
 
                         Combo.Add(new MenuBool("useQ", "Use Q in Combo", true));
-                        Combo.Add(new MenuBool("useW", "Use W in Combo", true));
+                        Combo.Add(new MenuBool("useW", "Use W in Combo", false));
                         Combo.Add(new MenuBool("useE", "Use E in Combo", true));
                         Combo.Add(new MenuBool("useR", "Use R in Combo", true));
                         if (IsIgnite)
@@ -44,10 +44,15 @@ namespace Classic_Misdirection
                         {
                             ComboLogics = new Menu("combologics", "Combo Logic Setings");
                             {
+                                ComboLogics.Add(new MenuList("rlogic", "Select R Logic", new[] { "Manuel Settings", "Stick to combo logic" }, 0));
+                                ComboLogics.Add(new MenuSeperator("info2", "Manuel Settings activates Manuel Settings"));
+                                ComboLogics.Add(new MenuSeperator("info3", "Stick to combo activates Combo Logic options"));
                                 ComboLogics.Add(new MenuList("select", "Select Combo Logic", new[] { "Dynamic combo", "Manuel Combo" }, 0));
                                 ComboLogics.Add(new MenuSeperator("b1", "Manuel Combo Settings"));
                                 ComboLogics.Add(new MenuList("mCombo", "Select Combo Logic", new[] { "Q>E>W>R", "Q>R>E>W", "E>Q>W>R", "E>W>Q>R", "W>R>Q>E", "W>Q>R>E", "Q>R>W>E", "Double Stun" }, 0));
                                 ComboLogics.Add(new MenuSliderBool("delay", "Delay For Double Stun", true, 1650, 0, 3000));
+                                ComboLogics.Add(new MenuSeperator("info", "Manuel R Setings"));
+                                ComboLogics.Add(new MenuList("rslogic", "Select Your Ulti", new[] { "Q", "E","W" }, 0));
                             }
                             Combo.Add(ComboLogics);
                         }
@@ -252,7 +257,7 @@ namespace Classic_Misdirection
                     //  Key.Add(new MenuKeyBind("jungleclearkey", "JungleClear Key", KeyCode.V, KeybindType.Press));
                     Key.Add(new MenuSeperator("other", "Other Key Settings"));
                     Key.Add(new MenuKeyBind("escape", "Escape Key", KeyCode.Y, KeybindType.Press));
-                    Key.Add(new MenuKeyBind("wallkey", "Wall Jump Key", KeyCode.Y, KeybindType.Press));
+                    //Key.Add(new MenuKeyBind("wallkey", "Wall Jump Key", KeyCode.Y, KeybindType.Press));
 
                 }
                 RootM.Add(Key);

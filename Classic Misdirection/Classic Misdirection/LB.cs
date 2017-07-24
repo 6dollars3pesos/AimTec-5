@@ -2,6 +2,7 @@
 using System;
 using Aimtec;
 using Aimtec.SDK.Menu.Components;
+using Aimtec.SDK.Menu.Config;
 using Aimtec.SDK.TargetSelector;
 
 namespace Classic_Misdirection
@@ -44,16 +45,7 @@ namespace Classic_Misdirection
                 this.DoEscape();
             }
             DoKillSteal();
-            if ((lastp + 7500) < Game.TickCount && combostart)
-            {
-                ComboName = GetComboName();
-                lastp = Game.TickCount;
-                combostart = false;
-            }
-            else if (!combostart)
-            {
-                ComboName = GetComboName();
-            }
+            // OnlyE();
         }
 
 

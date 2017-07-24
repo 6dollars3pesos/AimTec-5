@@ -32,48 +32,68 @@ namespace Classic_Misdirection
                 Render.Circle(MyHero.Position, R.Range, 50, Color.Brown);
             }
             var drawpos = "Default";
-            if (RootM["draw"]["combomode"].As<MenuBool>().Enabled)
+            if (RootM["combo"]["combologics"]["rlogic"].As<MenuList>().Value == 0)
             {
-                if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value == 0)
+                var dp = "DF";
+                switch (RootM["combo"]["combologics"]["rslogic"].As<MenuList>().Value)
                 {
-                    drawpos = "Current Combo Mode: Dynamic Combo";
+                    case 0:
+                        dp = " Q";
+                        break;
+                    case 1:
+                        dp = " E";
+                        break;
+                    case 2:
+                        dp = " W";
+                        break;
                 }
-                else if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value == 1)
+                drawpos = "Manuel R Selection :" + dp;
+            }
+            else
+            {
+                if (RootM["draw"]["combomode"].As<MenuBool>().Enabled)
                 {
-                    switch (RootM["combo"]["combologics"]["mCombo"].As<MenuList>().Value)
+                    if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value == 0)
                     {
-                        case 0:
-                            drawpos = "Current Combo Mode: Q>E>W>R";
-                            break;
-                        case 1:
-                            drawpos = "Current Combo Mode: Q>R>E>W";
-                            break;
-                        case 2:
-                            drawpos = "Current Combo Mode: E>Q>W>R";
-                            break;
-                        case 3:
-                            drawpos = "Current Combo Mode: E>W>Q>R";
-                            break;
-                        case 4:
-                            drawpos = "Current Combo Mode: W>R>Q>E";
-                            break;
-                        case 5:
-                            drawpos = "Current Combo Mode: W>Q>R>E";
-                            break;
-                        case 6:
-                            drawpos = "Current Combo Mode: Q>R>W>E";
-                            break;
-                        case 7:
-                            drawpos = "Current Combo Mode: Double Stun";
-                            break;
+                        drawpos = "Current Combo Mode: Dynamic Combo";
+                    }
+                    else if (RootM["combo"]["combologics"]["select"].As<MenuList>().Value == 1)
+                    {
+                        switch (RootM["combo"]["combologics"]["mCombo"].As<MenuList>().Value)
+                        {
+                            case 0:
+                                drawpos = "Current Combo Mode: Q>E>W>R";
+                                break;
+                            case 1:
+                                drawpos = "Current Combo Mode: Q>R>E>W";
+                                break;
+                            case 2:
+                                drawpos = "Current Combo Mode: E>Q>W>R";
+                                break;
+                            case 3:
+                                drawpos = "Current Combo Mode: E>W>Q>R";
+                                break;
+                            case 4:
+                                drawpos = "Current Combo Mode: W>R>Q>E";
+                                break;
+                            case 5:
+                                drawpos = "Current Combo Mode: W>Q>R>E";
+                                break;
+                            case 6:
+                                drawpos = "Current Combo Mode: Q>R>W>E";
+                                break;
+                            case 7:
+                                drawpos = "Current Combo Mode: Double Stun";
+                                break;
+                        }
                     }
                 }
-                var pos = MyHero.FloatingHealthBarPosition;
-                    pos.X += 43;
-                    pos.Y += 24;
-                    Render.Text(pos, Color.White, drawpos);
-
+              
             }
+            var pos = MyHero.FloatingHealthBarPosition;
+            pos.X += 43;
+            pos.Y += 24;
+            Render.Text(pos, Color.White, drawpos);
 
             #endregion
         }

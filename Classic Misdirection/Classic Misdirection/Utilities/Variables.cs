@@ -11,7 +11,7 @@ namespace Classic_Misdirection
         public bool delaycheck = false;
         public int lastp = 0;
         public bool combostart = false;
-        public string ComboName;
+
         //leblancq  leblancw leblancwreturn leblance leblancrtoggle leblancrwreturn
     }
 }

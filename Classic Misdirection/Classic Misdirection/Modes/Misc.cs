@@ -3,6 +3,7 @@
 using System;
 using Aimtec;
 using Aimtec.SDK.Extensions;
+using Aimtec.SDK.Menu.Components;
 
 namespace Classic_Misdirection
 {
@@ -55,6 +56,18 @@ namespace Classic_Misdirection
                 return "Gap";
             }
             return "DF";
+        }
+
+        public void OnlyE()
+        {
+            if (!target.IsValid || target == null)
+            {
+                return;
+            }
+            if (RootM["keys"]["onlye"].As<MenuKeyBind>().Enabled)
+            {
+                CastE(target);
+            }
         }
     }
 }

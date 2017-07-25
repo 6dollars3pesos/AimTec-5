@@ -13,10 +13,10 @@ namespace Classic_Misdirection
 
         public void DoLaneClear()
         {
-            bool Qmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
-            bool Wmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
-            bool Emana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
-            bool Rmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Rmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.R).Cost;
             int qcount = 0;
             foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(1400)))
             {

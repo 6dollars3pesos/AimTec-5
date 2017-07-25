@@ -10,9 +10,9 @@ namespace The_Living_Shadow
     {
         public void DoLaneClear()
         {
-            bool Qmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
-            bool Wmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
-            bool Emana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
             var poscheck = !Wpos.Equals(new Vector3()) ? Wpos : MyHero.ServerPosition;
             foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900)))
             {

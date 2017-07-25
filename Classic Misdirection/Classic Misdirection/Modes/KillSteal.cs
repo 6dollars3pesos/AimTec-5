@@ -50,7 +50,7 @@ namespace Classic_Misdirection
                 }
                 if (!IsIgnite) continue;
                 var dmgI = (50 + ((MyHero.Level) * 20));
-                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgQ && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
+                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgI && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
                     RootM["killsteal"]["useI"].As<MenuBool>().Enabled)
                 {
                     Ignite.CastOnUnit(hptarget);

@@ -12,8 +12,8 @@ namespace The_Living_Shadow
     {
         public void DoLastHit()
         {
-            bool Qmana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
-            bool Emana = MyHero.ManaPercent() > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
+            bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
+            bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
             foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900)))
             {
                 double Qdamage = MyHero.GetSpellDamage(minion, SpellSlot.Q);

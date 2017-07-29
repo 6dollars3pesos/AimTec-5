@@ -47,7 +47,7 @@ namespace Orianna_by_Krystra
         }
         public void CastR(Obj_AI_Base a)
         {
-            if (!E.Ready || MyHero.Mana < MyHero.SpellBook.GetSpell(SpellSlot.E).Cost)
+            if (!E.Ready || MyHero.Mana < MyHero.SpellBook.GetSpell(SpellSlot.R).Cost)
             {
                 return;
             }

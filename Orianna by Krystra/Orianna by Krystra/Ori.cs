@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using Aimtec;
 using Aimtec.SDK.Menu.Components;
 using Aimtec.SDK.Menu.Config;
@@ -28,7 +29,7 @@ namespace Orianna_by_Krystra
                 }
                 return;
             }
-            target = TargetSelector.GetTarget(925);
+            target = TargetSelector.GetTarget(1500);
             if (GlobalKeys.ComboKey.Active)
             {
                 DoCombo();
@@ -53,17 +54,24 @@ namespace Orianna_by_Krystra
             {
                 Escaping = false;
             }
-            DoAutoQHarass();
+            if (RootM["keys"]["harass"].As<MenuKeyBind>().Enabled)
+            {
+                DoAutoQHarass();
+            }
+
             AutoCasting();
             DoKillSteal();
         }
+
         private void OnDraw()
         {
             if (MyHero.IsDead)
             {
                 return;
             }
+            DoDraws();
         }
+
         private void UpdateBuff(Obj_AI_Base sender, Buff buff)
         {
             if(!sender.IsValid || sender.IsAlly ||sender.Type == MyHero.Type)
@@ -76,13 +84,13 @@ namespace Orianna_by_Krystra
         }
         private void OnCastSpell(Obj_AI_Base sender, SpellBookCastSpellEventArgs e)
         {
-            if (!sender.IsMe || !RootM["misc"]["blockr"]["use"].As<MenuBool>().Enabled)
+            if (!sender.IsMe || !RootM["misc"]["blockr"]["use"].As<MenuBool>().Enabled|| GlobalKeys.ComboKey.Active)
             {
                 return;
             }
             if (e.Slot == SpellSlot.R)
             {
-                if (Aimtec.SDK.Extensions.UnitExtensions.CountEnemyHeroesInRange(e.Target, R.Range) <= RootM["misc"]["blockr"]["rcount"].As<MenuSlider>().Value)
+                if (CountEnemyHeroesInRange(target.ServerPosition, R.Range) <= RootM["misc"]["blockr"]["rcount"].As<MenuSlider>().Value)
                 {
                     e.Process = false;
                 }

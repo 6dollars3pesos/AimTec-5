@@ -8,7 +8,7 @@ namespace Orianna_by_Krystra
     {
         public static Obj_AI_Hero MyHero => ObjectManager.GetLocalPlayer();
         public Obj_AI_Hero target;
-        public Vector3 Ball;
+        public Vector3 Ball = MyHero.ServerPosition;
         public bool Escaping = false;
         public static readonly string[] TargettedSpelCollection =
         {

@@ -9,16 +9,16 @@ namespace Orianna_by_Krystra
     {
         public void DoCombo()
         {
-            if (MyHero.ManaPercent() < (RootM["combo"]["Mana"].As<MenuSliderBool>().Value) || target == null || !target.IsValid)
+            if (MyHero.ManaPercent() < (RootM["combo"]["Mana"].As<MenuSlider>().Value) || target == null || !target.IsValid)
             {
                 return;
             }
 
             bool useQ = RootM["combo"]["useQ"].As<MenuBool>().Enabled;
-            bool useE = RootM["combo"]["useE"].As<MenuBool>().Enabled;
+            int useE = RootM["combo"]["useE"].As<MenuList>().Value;
             bool useW = RootM["combo"]["useW"].As<MenuBool>().Enabled;
             bool useR = RootM["combo"]["useR"].As<MenuBool>().Enabled;
-            int rlogic = RootM["combo"]["rlogic"].As<MenuSlider>().Value;
+            int rlogic = RootM["combo"]["rlogic"].As<MenuList>().Value;
             double dmgR = MyHero.GetSpellDamage(target, SpellSlot.R);
             double dmgQ = MyHero.GetSpellDamage(target, SpellSlot.Q);
             double dmgW = MyHero.GetSpellDamage(target, SpellSlot.W);
@@ -27,7 +27,7 @@ namespace Orianna_by_Krystra
             {
                 CastQ(target);
             }
-            if(useW && target.Distance(Ball) < W.Width)
+            if(useW && target.Distance(Ball) < W.Range)
             {
                 CastW();
             }
@@ -52,6 +52,18 @@ namespace Orianna_by_Krystra
                         CastR(target);
                         break;
                 }
+            }
+            switch (useE)
+            {
+                case 0:
+                    if (MyHero.HealthPercent() < 35)
+                    {
+                        CastE(MyHero);
+                    }
+                    break;
+                case 1:
+                    CastE(MyHero);
+                    break;
             }
             if (RootM["combo"]["UseRM"].As<MenuBool>().Enabled && R.GetPrediction(target).AoeTargetsHitCount>= RootM["combo"]["rcount"].As<MenuSlider>().Value)
             {

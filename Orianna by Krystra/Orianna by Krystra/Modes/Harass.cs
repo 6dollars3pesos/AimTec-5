@@ -1,4 +1,5 @@
-﻿using Aimtec.SDK.Extensions;
+﻿using System;
+using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Components;
 
 
@@ -13,19 +14,20 @@ namespace Orianna_by_Krystra
                 return;
             }
             bool useQ = RootM["harass"]["useQ"].As<MenuBool>().Enabled;
-            bool useW = RootM["harass"]["useE"].As<MenuBool>().Enabled;
+            bool useW = RootM["harass"]["useW"].As<MenuBool>().Enabled;
             if (useQ)
             {
                 CastQ(target);
             }
-            if (useW && target.Distance(Ball)<W.Width)
+            if (useW  && target.Distance(Ball) <W.Range)
             {
+                Console.WriteLine(W.Range);
                 CastW();
             }
         }
         public void DoAutoQHarass()
         {
-            if (MyHero.ManaPercent() < (RootM["harass"]["Mana"].As<MenuSliderBool>().Value) || !target.IsValid || target == null)
+            if (MyHero.ManaPercent() < (RootM["harass"]["Mana"].As<MenuSlider>().Value) ||  target == null)
             {
                 return;
             }

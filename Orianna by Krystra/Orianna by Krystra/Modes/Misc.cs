@@ -25,17 +25,7 @@ namespace Orianna_by_Krystra
         }
         public void AutoCasting()
         {
-            if (!target.IsValid || target == null)
-            {
-                return;
-            }
-            if (RootM["misc"]["auto"]["useW"].As<MenuBool>().Enabled)
-            {
-                if(CountEnemyHeroesInRange(Ball,W.Width)>= RootM["misc"]["auto"]["wcount"].As<MenuSlider>().Value)
-                {
-                    CastW();
-                }
-            }
+
             if (RootM["misc"]["auto"]["useR"].As<MenuBool>().Enabled)
             {
                 if (CountEnemyHeroesInRange(Ball, R.Range) >= RootM["misc"]["auto"]["rcount"].As<MenuSlider>().Value)
@@ -43,6 +33,14 @@ namespace Orianna_by_Krystra
                     R.Cast();
                 }
             }
+            if (RootM["misc"]["auto"]["useW"].As<MenuBool>().Enabled)
+            {
+                if(CountEnemyHeroesInRange(Ball,W.Range)>= RootM["misc"]["auto"]["wcount"].As<MenuSlider>().Value)
+                {
+                    CastW();
+                }
+            }
+           
         }
     }
 }

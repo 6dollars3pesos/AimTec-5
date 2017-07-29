@@ -12,7 +12,7 @@ namespace Orianna_by_Krystra
         public void LoadSpells()
         {
             Q = new Spell(SpellSlot.Q, 825f);
-            W = new Spell(SpellSlot.W, 1050f);
+            W = new Spell(SpellSlot.W, 225f);
             E = new Spell(SpellSlot.E, 1100f);
             R = new Spell(SpellSlot.R, 320f);
 

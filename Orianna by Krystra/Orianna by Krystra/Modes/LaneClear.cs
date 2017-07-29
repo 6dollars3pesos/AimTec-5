@@ -14,7 +14,7 @@ namespace Orianna_by_Krystra
                 {
                     if (RootM["farm"]["laneclear"]["useW"].As<MenuBool>().Enabled)
                     {
-                      if(CountEnemyMinions(Ball,W.Width)> RootM["farm"]["laneclear"]["wcount"].As<MenuSlider>().Value && minion.Distance(Ball)<W.Width)
+                      if(CountEnemyMinions(Ball,W.Range)> RootM["farm"]["laneclear"]["wcount"].As<MenuSlider>().Value && minion.Distance(Ball)<W.Range)
                         {
                             W.Cast();
                         }

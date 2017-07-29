@@ -18,7 +18,7 @@ namespace Orianna_by_Krystra
         #endregion
         public void LoadMenu()
         {
-            RootM = new Menu("champname", "Classic Misdirection- [Leblanc]", true);
+            RootM = new Menu("orianna", "Big Fat Ball- [Orianna]", true);
             Orbwalker.Implementation.Attach(RootM);
             {
                 #region combo
@@ -26,7 +26,7 @@ namespace Orianna_by_Krystra
                     Combo = new Menu("combo", "Combo Settings");
                     Combo.Add(new MenuBool("useQ", "Use Q in Combo", true));
                     Combo.Add(new MenuBool("useW", "Use W in Combo", true));
-                    Combo.Add(new MenuList("useE", "E logic for combo", new[] { "If Target Killable", "Always", " Never" }, 0));
+                    Combo.Add(new MenuList("useE", "E logic for combo", new[] { "If my hp below", "Always", " Never" }, 0));
                     Combo.Add(new MenuSeperator("blank1", " R Settings"));
                     Combo.Add(new MenuBool("useR", "Use R  For Single Target", true));
                     Combo.Add(new MenuList("rlogic", "R logic (Single Target)", new[] { "Smart", "If Target Killable", "Always" }, 0));
@@ -36,7 +36,7 @@ namespace Orianna_by_Krystra
                     {
                         Combo.Add(new MenuBool("useI", "Use Ignite in Combo", true));
                     }
-                    Combo.Add(new MenuSliderBool("Mana", "Mana Manager %", true, 15, 10, 99));
+                    Combo.Add(new MenuSlider("Mana", "Mana Manager %", 15, 10, 99));
 
                     ComboBlacklist = new Menu("blacklist", "Blacklist For Ulti");
                     foreach (var tar in GameObjects.EnemyHeroes)
@@ -55,7 +55,7 @@ namespace Orianna_by_Krystra
                     {
                         Harass.Add(new MenuBool("useQ", "Use Q in Harass", true));
                         Harass.Add(new MenuBool("useW", "Use W in Harass", true));
-                        Harass.Add(new MenuSliderBool("Mana", "Mana Manager %", true, 15, 10, 99));
+                        Harass.Add(new MenuSlider("Mana", "Mana Manager %", 15, 10, 99));
                     }
                 }
                 RootM.Add(Harass);
@@ -147,7 +147,7 @@ namespace Orianna_by_Krystra
                         {
                             Blockr = new Menu("blockr", "Block R Settings");
                             Blockr.Add(new MenuBool("use", "Block R if hit <= enemy", true));
-                            Blockr.Add(new MenuSlider("rcount", "Minimum enemy", 0, 1, 5));
+                            Blockr.Add(new MenuSlider("rcount", "Minimum enemy", 0, 0, 5));
 
                         }
                         Misc.Add(Blockr);
@@ -213,7 +213,7 @@ namespace Orianna_by_Krystra
                 {
                     Key = new Menu("keys", "Key Settings");
                     Key.Add(new MenuSeperator("harass1", "Harass Key Settings"));
-                    Key.Add(new MenuKeyBind("autoq", "Smart Auto Q Harass", KeyCode.T, KeybindType.Toggle));
+                    Key.Add(new MenuKeyBind("harass", "Smart Auto Q Harass", KeyCode.T, KeybindType.Toggle));
                     Key.Add(new MenuSeperator("other", "Other Key Settings"));
                     Key.Add(new MenuKeyBind("escape", "Escape Key", KeyCode.Y, KeybindType.Press));
 
@@ -221,10 +221,10 @@ namespace Orianna_by_Krystra
                 RootM.Add(Key);
                 #endregion
 
-                RootM.Add(new MenuSeperator("1", "ScriptName"));
+                RootM.Add(new MenuSeperator("1", "Big Fat Ball"));
                 RootM.Add(new MenuSeperator("2", "Script Version : Beta Release"));
                 RootM.Add(new MenuSeperator("3", "Script was made by Krystra"));
-                RootM.Add(new MenuSeperator("4", "Leauge Of Legends Version: 7.14"));
+                RootM.Add(new MenuSeperator("4", "Leauge Of Legends Version: 7.15"));
                 RootM.Attach();
             }
 

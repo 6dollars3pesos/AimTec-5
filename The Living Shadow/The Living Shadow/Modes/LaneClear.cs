@@ -14,7 +14,7 @@ namespace The_Living_Shadow
             bool Wmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.W).Cost;
             bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
             var poscheck = !Wpos.Equals(new Vector3()) ? Wpos : MyHero.ServerPosition;
-            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900)))
+            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900) && m.IsMinion))
             {
                 if (minion != null)
                 {

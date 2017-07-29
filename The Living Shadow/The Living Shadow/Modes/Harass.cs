@@ -27,7 +27,7 @@ namespace The_Living_Shadow
 
             if ((RootM["harass"]["useQ"].As<MenuBool>().Enabled))
             {
-                this.CastQ(target);
+                CastQ(target);
             }
 
             if (RootM["harass"]["useE"].As<MenuBool>().Enabled)

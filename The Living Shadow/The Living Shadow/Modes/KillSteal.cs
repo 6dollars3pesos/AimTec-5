@@ -6,6 +6,7 @@ using Aimtec.SDK.Menu.Components;
 
 using Aimtec.SDK.Util.Cache;
 using System.Linq;
+using Aimtec.SDK.Menu.Config;
 using Aimtec.SDK.Util;
 
 namespace The_Living_Shadow
@@ -27,20 +28,20 @@ namespace The_Living_Shadow
                 }
                 var Health = hptarget.Health;
                 var dmgE = MyHero.GetSpellDamage(hptarget, SpellSlot.E);
-                if (MyHero.Distance(hptarget) < E.Range && Health < dmgE && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
+                if (MyHero.Distance(hptarget) < E.Range && Health < dmgE && !GlobalKeys.ComboKey.Active &&
                     RootM["killsteal"]["useE"].As<MenuBool>().Enabled)
                 {
                     this.CastE();
                 }
                 var dmgQ = MyHero.GetSpellDamage(hptarget, SpellSlot.Q);
-                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgQ && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
+                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgQ && !GlobalKeys.ComboKey.Active &&
                     RootM["killsteal"]["useQ"].As<MenuBool>().Enabled)
                 {
                     this.CastQ(hptarget);
                 }
                 if (!IsIgnite) continue;
                 var dmgI = (50 + ((MyHero.Level) * 20));
-                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgI && !RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled &&
+                if (MyHero.Distance(hptarget) < Q.Range && Health < dmgI && !GlobalKeys.ComboKey.Active &&
                     RootM["killsteal"]["useI"].As<MenuBool>().Enabled)
                 {
                     Ignite.CastOnUnit(hptarget);

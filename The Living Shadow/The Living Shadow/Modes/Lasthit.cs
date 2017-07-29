@@ -14,7 +14,7 @@ namespace The_Living_Shadow
         {
             bool Qmana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.Q).Cost;
             bool Emana = MyHero.Mana > MyHero.SpellBook.GetSpell(SpellSlot.E).Cost;
-            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900)))
+            foreach (var minion in GameObjects.EnemyMinions.Where(m => m.IsValidTarget(900) && m.IsMinion))
             {
                 double Qdamage = MyHero.GetSpellDamage(minion, SpellSlot.Q);
                 double Edamage = MyHero.GetSpellDamage(minion, SpellSlot.E);

@@ -10,6 +10,10 @@ namespace The_Living_Shadow
     {
         public void ReturnSettings()
         {
+            if (target == null || !target.IsValid)
+            {
+                return;
+            }
             if (RootM["combo"]["turnback"]["swaphp"].As<MenuSliderBool>().Enabled &&
                 RootM["combo"]["useW"].As<MenuBool>().Enabled)
             {

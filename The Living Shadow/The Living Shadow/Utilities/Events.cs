@@ -10,6 +10,7 @@ namespace The_Living_Shadow
             Render.OnPresent += OnDraw;
             Game.OnUpdate += OnTick;
             Obj_AI_Base.OnProcessSpellCast += ProcessSpell;
+            Game.OnWndProc += ClickEvent;
         }
     }
 }

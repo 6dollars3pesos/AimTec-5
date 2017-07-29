@@ -248,16 +248,11 @@ namespace The_Living_Shadow
                 {
                     Key = new Menu("keys", "Key Settings");
                     Key.Add(new MenuSeperator("combo1", "Combo Key Settings"));
-                    Key.Add(new MenuKeyBind("combokey", "Combo Key", KeyCode.Space, KeybindType.Press));
-                    // Key.Add(new MenuKeyBind("combomode", "Combo Mode Key", KeyCode.G, KeybindType.Press));
-                    Key.Add(new MenuSeperator("harass1", "Harass Key Settings"));
-                    Key.Add(new MenuKeyBind("harasskey", "Smart Harass Key", KeyCode.C, KeybindType.Press));
-                    Key.Add(new MenuSeperator("lane1", "Clear Key Settings"));
-                    Key.Add(new MenuKeyBind("lasthitkey", "LastHit Key", KeyCode.X, KeybindType.Press));
-                    Key.Add(new MenuKeyBind("laneclearkey", "LaneClear Key", KeyCode.V, KeybindType.Press));
+                     Key.Add(new MenuKeyBind("combomode", "Combo Mode Key", KeyCode.G, KeybindType.Press));
                     //  Key.Add(new MenuKeyBind("jungleclearkey", "JungleClear Key", KeyCode.V, KeybindType.Press));
                     Key.Add(new MenuSeperator("other", "Other Key Settings"));
                     Key.Add(new MenuKeyBind("escape", "Escape Key", KeyCode.Y, KeybindType.Press));
+                    Key.Add(new MenuSeperator("b","Combo,Harass,Clear keys are the same with orbwalker"));
 
                 }
 

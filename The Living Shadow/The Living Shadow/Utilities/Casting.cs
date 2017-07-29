@@ -17,12 +17,12 @@ namespace The_Living_Shadow
             {
                 if (Wpos.Distance(unit.ServerPosition) < Q.Range)
                 {
-                    Q.Cast(unit);
+                    Q.Cast(unit.ServerPosition);
                 }
             }
             else if (MyHero.Distance(unit) < Q.Range)
             {
-                Q.Cast(unit);
+                Q.Cast(unit.ServerPosition);
             }
         }
 

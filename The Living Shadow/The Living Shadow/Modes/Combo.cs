@@ -3,6 +3,7 @@ using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Components;
+using Aimtec.SDK.Menu.Config;
 using Aimtec.SDK.Util;
 using Aimtec.SDK.Util.Cache;
 
@@ -12,7 +13,7 @@ namespace The_Living_Shadow
     {
         public void DoCombo()
         {
-            var globalrange = RootM["combo"]["forcer"].As<MenuBool>().Enabled && R.Ready && this.IsR1() ? R.Range - 5 : Q.Range;
+            var globalrange = RootM["combo"]["forcer"].As<MenuBool>().Enabled && RootM["combo"]["useR"].As<MenuBool>().Enabled&& R.Ready && this.IsR1() ? R.Range - 5 : 1500;
             if (target == null || !target.IsValid)
             {
                 return;
@@ -52,9 +53,9 @@ namespace The_Living_Shadow
                 }
                 else
                 {
-                    if (RootM["combo"]["useW"].As<MenuBool>().Enabled && !Rpos.Equals(new Vector3()) && MyHero.Distance(target) < W.Range && this.IsW1())
+                    if (RootM["combo"]["useW"].As<MenuBool>().Enabled && MyHero.Distance(target) < W.Range && this.IsW1())
                     {
-                        DelayAction.Queue(210, () => this.CastW(Wcastpos));
+                        DelayAction.Queue(210, () => this.CastW(target.ServerPosition));
                     }
 
                     else if (MyHero.Distance(target) > W.Range && target.IsValidTarget(W.Range + Q.Range / 2) &&
@@ -96,7 +97,7 @@ namespace The_Living_Shadow
 
                 if (IsIgnite)
                 {
-                    if (RootM["combo"]["useI"].As<MenuBool>().Enabled && RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled)
+                    if (RootM["combo"]["useI"].As<MenuBool>().Enabled && GlobalKeys.ComboKey.Active)
                     {
                         foreach (var tar in GameObjects.EnemyHeroes.Where(a => a.IsValidTarget(1200) && !a.IsDead))
                         {

@@ -3,12 +3,13 @@ using System;
 using System.Drawing;
 using Aimtec.SDK.Extensions;
 using Aimtec.SDK.Menu.Components;
+using Aimtec.SDK.Menu.Config;
 using Aimtec.SDK.TargetSelector;
 using Aimtec.SDK.Util;
 
 namespace The_Living_Shadow
 {
-  using Aimtec;
+    using Aimtec;
 
     internal partial class Zed
     {
@@ -20,8 +21,8 @@ namespace The_Living_Shadow
             this.LoadEvents();
 
 
-    }
-        
+        }
+
         private void OnTick()
         {
             if (MyHero.IsDead)
@@ -29,11 +30,11 @@ namespace The_Living_Shadow
                 return;
             }
             target = TargetSelector.GetTarget(1600);
-            if (RootM["keys"]["combokey"].As<MenuKeyBind>().Enabled)
+            if (GlobalKeys.ComboKey.Active)
             {
                 this.DoCombo();
             }
-            if (RootM["keys"]["harasskey"].As<MenuKeyBind>().Enabled)
+            if (GlobalKeys.MixedKey.Active)
             {
                 this.DoHarass();
             }
@@ -41,11 +42,11 @@ namespace The_Living_Shadow
             {
                 this.DoEscape();
             }
-            if (RootM["keys"]["lasthitkey"].As<MenuKeyBind>().Enabled || RootM["farm"]["lasthit"]["autolasthit"].As<MenuBool>().Enabled)
+            if (GlobalKeys.LastHitKey.Active || RootM["farm"]["lasthit"]["autolasthit"].As<MenuBool>().Enabled)
             {
                 this.DoLastHit();
             }
-            if (RootM["keys"]["laneclearkey"].As<MenuKeyBind>().Enabled)
+            if (GlobalKeys.WaveClearKey.Active)
             {
                 this.DoLaneClear();
             }
@@ -71,14 +72,14 @@ namespace The_Living_Shadow
                 return;
             }
 
-         
+
             if (e.SpellData.Name == "ZedW")
             {
                 Wpos = e.End;
                 Wtimer = 5;
                 Wdmgp = true;
                 StartTime = Game.ClockTime + 5f;
-             
+
             }
             else if (e.SpellData.Name == "ZedW2")
             {
@@ -103,7 +104,7 @@ namespace The_Living_Shadow
             {
                 if (Rtimer == 7.5)
                 {
-                    DelayAction.Queue((int)Rtimer*1000, () =>
+                    DelayAction.Queue((int) Rtimer * 1000, () =>
                         {
                             Rtimer = 0f;
                             Rdmgcheck = false;
@@ -120,7 +121,7 @@ namespace The_Living_Shadow
             {
                 if (Wtimer == 5)
                 {
-                    DelayAction.Queue((int)Wtimer*1000, () =>
+                    DelayAction.Queue((int) Wtimer * 1000, () =>
                         {
                             Wtimer = 0;
                             Wdmgp = false;
@@ -131,6 +132,20 @@ namespace The_Living_Shadow
                     );
                 }
                 GW = W;
+            }
+        }
+
+        private void ClickEvent(WndProcEventArgs e)
+        {
+            if (RootM["keys"]["combomode"].As<MenuKeyBind>().Enabled)
+            {
+                RootM["combo"]["rlogic"].As<MenuList>().Value += 1;
+                RootM["keys"]["combomode"].As<MenuKeyBind>().Value =
+                    !RootM["keys"]["combomode"].As<MenuKeyBind>().Enabled;
+                if (RootM["combo"]["rlogic"].As<MenuList>().Value > 2)
+                {
+                    RootM["combo"]["rlogic"].As<MenuList>().Value = 0;
+                }
             }
         }
     }

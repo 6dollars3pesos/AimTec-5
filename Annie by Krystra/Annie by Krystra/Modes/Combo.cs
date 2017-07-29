@@ -13,7 +13,7 @@ namespace Annie_by_Krystra
         public void DoCombo()
         {
             int rlogic = RootM["skill"]["Rlogic"]["rlogic"].As<MenuList>().Value;
-            int mVal = RootM["skill"]["Rlogic"]["rlogic2"].As<MenuList>().Value == 0 ? 2 : 1;
+            int mVal = RootM["skill"]["Rlogic"]["rlogic2"].As<MenuList>().Value == 0 ? 3: 1;
             bool useQ = RootM["combo"]["useQ"].As<MenuBool>().Enabled;
             bool useW = RootM["combo"]["useW"].As<MenuBool>().Enabled;
             bool useR = RootM["combo"]["useR"].As<MenuBool>().Enabled;
